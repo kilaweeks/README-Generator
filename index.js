@@ -59,7 +59,8 @@ const promptUser = () => {
 
 const generateReadme = (answers) =>
   `
-  ![License](https://img.shields.io/badge/license-${answers.license.trim()}-blue)
+  ![License](https://img.shields.io/badge/license-${encodeURIComponent(answers.license)}-blue)
+  
   ## Title
 
   ${answers.title}
