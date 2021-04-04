@@ -35,13 +35,14 @@ const promptUser = () => {
     {
       type: 'input',
       name: 'tests',
-      message: 'List any instructions for running tests for your project.',
+      message: 'List any instructions to run tests for your project.',
     },
     {
       type: 'list',
       name: 'license',
       message: 'Choose a license in order to let other developers know what they can and cannot do with your project. Refer to (https://choosealicense.com/) if you need help choosing a license.',
-      choices: ['email', 'phone', 'telekinesis'],
+      choices: ['MIT License', 'GNU GPLv3', 'Apache License 2.0', 'ISC License', 'Mozilla Public License 2.0', 'Boost Software License 1.0', 'The Unlicense'],
+    default: "MIT License"
     },  
     {
       type: 'input',
@@ -58,6 +59,7 @@ const promptUser = () => {
 
 const generateReadme = (answers) =>
   `
+  ![License](https://img.shields.io/badge/license-${answers.license.trim()}-blue)
   ## Title
 
   ${answers.title}
@@ -88,7 +90,7 @@ const generateReadme = (answers) =>
 
   ## License
 
-  ${answers.license}
+  This project is covered under ${answers.license}.
 
   ## Questions
 
@@ -99,7 +101,7 @@ const generateReadme = (answers) =>
 const init = () => {
   promptUser()
     .then((answers) => writeFileAsync('README.md', generateReadme(answers)))
-    .then(() => console.log('Successfully wrote to README.md'))
+    .then(() => console.log('Successfully wrote README.md'))
     .catch((err) => console.error(err));
 };
 
